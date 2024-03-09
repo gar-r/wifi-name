@@ -6,14 +6,14 @@ import (
 )
 
 type Provider interface {
-	GetSSID() (string, error)
+	GetSSID(device string) (string, error)
 }
 
 type CmdProvider struct {
 	cmd *exec.Cmd
 }
 
-func (c *CmdProvider) GetSSID() (string, error) {
+func (c *CmdProvider) GetSSID(_ string) (string, error) {
 	out, err := c.cmd.Output()
 	if err != nil {
 		return "", err

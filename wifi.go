@@ -9,12 +9,12 @@ import (
 
 var os = runtime.GOOS
 
-func GetSSID() (string, error) {
+func GetSSID(device string) (string, error) {
 	p, err := getProvider()
 	if err != nil {
 		return "", err
 	}
-	return p.GetSSID()
+	return p.GetSSID(device)
 }
 
 func getProvider() (ssid.Provider, error) {

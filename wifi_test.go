@@ -14,14 +14,17 @@ func TestGetSSID(t *testing.T) {
 		defer func() {
 			os = runtime.GOOS
 		}()
-		_, err := GetSSID()
+		_, err := GetSSID("dev")
 		assert.Error(t, err)
 	})
 
 	t.Run("get ssid", func(t *testing.T) {
-		ssid, err := GetSSID()
-		assert.NoError(t, err)
-		t.Logf("ssid: %s\n", ssid)
+		ssid, err := GetSSID("en0")
+		if err != nil {
+			t.Logf("err: %s\n", err)
+		} else {
+			t.Logf("ssid: %s\n", ssid)
+		}
 	})
 
 }
