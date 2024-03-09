@@ -21,6 +21,8 @@ func getProvider() (ssid.Provider, error) {
 	switch os {
 	case "darwin":
 		return &ssid.Darwin{}, nil
+	case "linux":
+		return &ssid.Linux{}, nil
 	default:
 		return nil, fmt.Errorf("unsupported os: '%s'", os)
 	}

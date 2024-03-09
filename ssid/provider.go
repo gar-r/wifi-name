@@ -1,22 +1,21 @@
 package ssid
 
 import (
+	"fmt"
 	"os/exec"
-	"strings"
 )
 
+// Provider is an OS agnostic interface to fetch SSID information.
 type Provider interface {
+	// GetSSID retrieves the SSID for the specified device.
 	GetSSID(device string) (string, error)
 }
 
-type CmdProvider struct {
-	cmd *exec.Cmd
-}
-
-func (c *CmdProvider) GetSSID(_ string) (string, error) {
-	out, err := c.cmd.Output()
+// execute an arbitrary command and return the output as string
+func execute(cmd *exec.Cmd) (string, error) {
+	out, err := cmd.Output()
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("command execution error: %s", err.Error())
 	}
-	return strings.TrimSpace(string(out)), nil
+	return string(out), nil
 }

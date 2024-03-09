@@ -8,17 +8,16 @@ import (
 
 var darwinRegex = regexp.MustCompile(`Current Wi-Fi Network: (.*)`)
 
-type Darwin struct {
-	CmdProvider
-}
+// Darwin implements Provider on Mac.
+type Darwin struct{}
 
 func (d *Darwin) GetSSID(device string) (string, error) {
-	d.cmd = exec.Command("networksetup", "-getairportnetwork", device)
-	out, err := d.CmdProvider.GetSSID(device)
+	cmd := exec.Command("networksetup", "-getairportnetwork", device)
+	out, err := execute(cmd)
 	if err != nil {
 		return "", err
 	}
-	matches := darwinRegex.FindStringSubmatch(out)
+	matches := darwinRegex.FindStringSubmatch(string(out))
 	if len(matches) > 1 {
 		return matches[1], nil
 	}
