@@ -17,7 +17,7 @@ func (d *Darwin) GetSSID(device string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	matches := darwinRegex.FindStringSubmatch(string(out))
+	matches := darwinRegex.FindStringSubmatch(out)
 	if len(matches) > 1 {
 		return matches[1], nil
 	}
