@@ -1,4 +1,4 @@
-module git.okki.hu/garrichs/wifi-name
+module github.com/gar-r/wifi-name
 
 go 1.22.0
 

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"runtime"
 
-	"git.okki.hu/garrichs/wifi-name/ssid"
+	"github.com/gar-r/wifi-name/ssid"
 )
 
 var os = runtime.GOOS
